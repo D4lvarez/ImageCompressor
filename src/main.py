@@ -6,14 +6,13 @@ def compress_image(filename):
     name, image_format = filename.split('.')
     image = Image.open(filename)
     image.save(f'{name}-min.{image_format}', quality=95, optimize=True)
-
+    return name, image_format
 
 def get_file():
     name = filedialog.askopenfilename()
     if messagebox.askokcancel(title='Compress Warning', message='You wants continue?'):
-        compress_image(name)
-        messagebox.showinfo('Congrats!', 'The was compressed successfully.')
-    
+        path, imfor = compress_image(name)
+        messagebox.showinfo('Congrats!', f'The was compressed successfully.\n On folder: {path}-min.{imfor}')
 
 
 def app():
